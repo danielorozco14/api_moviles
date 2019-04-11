@@ -9,14 +9,35 @@ var express = require('express'),
   bodyParser=require('body-parser');
 
   //INSTANCE CONNECTION URL
+//mongoose.Promise=global.Promise;
+
+//mongodb+srv://pdm-2019:<pdm2019>@pdm-cluster-nxntx.mongodb.net/test?retryWrites=true
+//mongoose.connect('mongodb://localhost/Tododb');
+//mongoose.connect('mongodb+srv://pdm-2019:<pdm2019>@pdm-cluster-nxntx.mongodb.net/test?retryWrites=true')
+
+
+var user = process.env.USERDB || "pdm-2019";
+var password= process.env.PASSDB || "pdm2019";
+var server = process.env.SERVER || "pdm-cluster-nxntx.mongodb.net/test?retryWrites=true'";
+var db= process.env.DATABASE || "coins-db";
+var string = `mongodb+srv://${user}:${password}@${server}/${db}`;
+
+//INSTANCE CONNECTION URL
 mongoose.Promise=global.Promise;
-mongoose.connect('mongodb://localhost/Tododb');
+
+mongoose.connect(string,{
+  useNewUrlParser:true,
+  useFindAndModify:false,
+  useCreateIndex:true
+}).then(()=>console.log('Conectado a MongoDB'))
+.catch(()=>console.error('No se pudo conectar a MONGODB'));
+
+
+
 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
-/** app.use(function(req, res) {
-    res.status(404).send({url: req.originalUrl + ' not found'})
-  });*/
+
 
 //IMPORTANDO LAS RUTAS
 var routes= require('./api/routes/todoListRoutes');
