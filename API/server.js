@@ -30,7 +30,7 @@ mongoose.connect(string,{
   useFindAndModify:false,
   useCreateIndex:true
 }).then(()=>console.log('Conectado a MongoDB'))
-.catch(()=>console.error('No se pudo conectar a MONGODB'));
+.catch((e)=>console.error('No se pudo conectar a MONGODB',e));
 
 
 
