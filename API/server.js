@@ -3,7 +3,7 @@
 
 var express = require('express'),
   app = express(),
-  port = process.env.PORT || 3000;
+  port = process.env.PORT || 3001;
   mongoose=require('mongoose'),
   Task=require('./api/models/todoListModel'),
   bodyParser=require('body-parser');
@@ -22,7 +22,7 @@ var server = process.env.SERVER || "pdm-cluster-nxntx.mongodb.net/test?retryWrit
 var db= process.env.DATABASE || "coins-db";
 var string = `mongodb+srv://${user}:${password}@${server}/${db}`;
 
-//INSTANCE CONNECTION URL
+//CONEXION URL
 mongoose.Promise=global.Promise;
 
 mongoose.connect(string,{
